@@ -13,6 +13,7 @@ fn main() {
     let file = BufReader::new(&f);
 
     let mut depth = 0;
+    let mut aim = 0;
     let mut x = 0;
 
     for line in file.lines() {
@@ -20,9 +21,12 @@ fn main() {
         let vals = l.trim().split_whitespace().collect::<Vec<&str>>();
         let val = vals[1].parse::<i64>().unwrap();
         match vals[0] {
-            "forward" => x += val,
-            "up" => depth -= val,
-            "down" => depth += val,
+            "forward" => {
+                x += val;
+                depth += aim * val;
+            },
+            "up" => aim -= val,
+            "down" => aim += val,
             _ => panic!("Command {} not supported!", vals[0]),
         }
     }
