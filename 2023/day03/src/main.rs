@@ -51,7 +51,6 @@ fn gear_finder<'a>(lines: impl IntoIterator<Item=&'a str>) -> i32 {
         }
 
         for gear_c in &mut last_line_gears.gears {
-            // TODO only by this point we would know if a gear qualifies or not
             gear_c.part_nums.extend(gather_part_nums(part_nums.clone(), gear_c.pos));
             if gear_c.part_nums.len() == 2 {
                 result += gear_c.part_nums.iter().map(|p| p.num).product::<i32>();
